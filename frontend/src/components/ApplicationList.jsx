@@ -58,7 +58,8 @@ const ApplicationList = ({ applications, onStatusUpdated, onApplicationDeleted }
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/api/applications/${id}`, { status: newStatus });
+      // const res = await axios.patch(`http://localhost:5000/api/applications/${id}`, { status: newStatus });
+      const res = await axios.patch(`${import.meta.env.BACKEND_URI}/api/applications/${id}`, { status: newStatus });
       onStatusUpdated(res.data);
     } catch (error) {
       console.error("Error updating status", error);
@@ -67,7 +68,7 @@ const ApplicationList = ({ applications, onStatusUpdated, onApplicationDeleted }
 
   const deleteApplication = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/applications/${id}`);
+      await axios.delete(`${import.meta.env.BACKEND_URI}/api/applications/${id}`);
       onApplicationDeleted(id);
     } catch (error) {
       console.error("Error deleting application", error);

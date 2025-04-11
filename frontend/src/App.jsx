@@ -112,7 +112,8 @@ const App = () => {
 
   const fetchApplications = async (filterParams = {}) => {
     try {
-      const res = await axios.get('http://localhost:5000/api/applications', { params: filterParams });
+      // const res = await axios.get('http://localhost:5000/api/applications', { params: filterParams });
+      const res = await axios.get(`${import.meta.env.BACKEND_URI}/api/applications`, { params: filterParams });
       setApplications(res.data);
     } catch (error) {
       console.error("Error fetching applications", error);
