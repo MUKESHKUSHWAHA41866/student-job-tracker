@@ -51,6 +51,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const ApplicationForm = ({ onApplicationAdded }) => {
   const [formData, setFormData] = useState({
     company: '',
@@ -59,6 +60,7 @@ const ApplicationForm = ({ onApplicationAdded }) => {
     dateOfApplication: '',
     link: ''
   });
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +71,7 @@ const ApplicationForm = ({ onApplicationAdded }) => {
     e.preventDefault();
     try {
       // const res = await axios.post('http://localhost:5000/api/applications', formData);
-      const res = await axios.post(`${import.meta.env.BACKEND_URI}/api/applications`, formData);
+      const res = await axios.post(`${API_BASE}/api/applications`, formData);
       onApplicationAdded(res.data);
       setFormData({ company: '', role: '', status: 'Applied', dateOfApplication: '', link: '' });
     } catch (error) {

@@ -109,11 +109,14 @@ const App = () => {
   const [applications, setApplications] = useState([]);
   const [filters, setFilters] = useState({});
   const [view, setView] = useState('form'); // 'form' or 'list'
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   const fetchApplications = async (filterParams = {}) => {
     try {
+      console.log(API_BASE);
+      
       // const res = await axios.get('http://localhost:5000/api/applications', { params: filterParams });
-      const res = await axios.get(`${import.meta.env.BACKEND_URI}/api/applications`, { params: filterParams });
+      const res = await axios.get(`${API_BASE}/api/applications`, { params: filterParams });
       setApplications(res.data);
     } catch (error) {
       console.error("Error fetching applications", error);

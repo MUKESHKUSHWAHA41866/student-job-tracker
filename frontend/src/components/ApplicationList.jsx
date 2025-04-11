@@ -55,11 +55,12 @@ import React from 'react';
 import axios from 'axios';
 
 const ApplicationList = ({ applications, onStatusUpdated, onApplicationDeleted }) => {
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   const updateStatus = async (id, newStatus) => {
     try {
       // const res = await axios.patch(`http://localhost:5000/api/applications/${id}`, { status: newStatus });
-      const res = await axios.patch(`${import.meta.env.BACKEND_URI}/api/applications/${id}`, { status: newStatus });
+      const res = await axios.patch(`${API_BASE}/api/applications/${id}`, { status: newStatus });
       onStatusUpdated(res.data);
     } catch (error) {
       console.error("Error updating status", error);
@@ -68,7 +69,7 @@ const ApplicationList = ({ applications, onStatusUpdated, onApplicationDeleted }
 
   const deleteApplication = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.BACKEND_URI}/api/applications/${id}`);
+      await axios.delete(`${API_BASE}/api/applications/${id}`);
       onApplicationDeleted(id);
     } catch (error) {
       console.error("Error deleting application", error);
@@ -77,7 +78,7 @@ const ApplicationList = ({ applications, onStatusUpdated, onApplicationDeleted }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto p-4">
-      {applications.map(app => (
+      {applications?.map(app => (
         <div
           key={app._id}
           className="bg-white shadow-md rounded-lg p-6 border border-gray-100 hover:shadow-lg transition"
