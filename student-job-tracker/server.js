@@ -17,6 +17,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Job Application Tracker API 🚀');
+});
+
 // API routes
 const applicationsRoute = require('./routes/applications');
 app.use('/api/applications', applicationsRoute);
